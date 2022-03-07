@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.72.0">
+    <title>Monitor</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uiv/1.4.1/uiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <style>
+        .table th,
+        .table td {
+            vertical-align: middle !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="row" style="margin-bottom: 30px;">
+                <div class="col-md-12">
+                    <table class="table table-condensed">
+                        <thead>
+                            <th>Item</th>
+                            <th class="text-center" @click="sort('price')">Hydra</th>
+                            <th class="text-center">Gold</th>
+                            <th class="text-center" @click="sort('eff')">Score</th>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in items">
+                                <td style="font-weight: 700;"><img :src="item.img" v-if="item.img" width="64" height="64" style="margin-right: 10px;">{{ item.name }}</td>
+                                <td class="text-center">{{ item.price }}</td>
+                                <td width="100" class="text-center"><input type="text" class="form-control text-center"
+                                        v-model="item.gold"></td>
+                                <td class="text-center">{{ item.eff }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        Vue.use(uiv, {
+            prefix: 'uiv'
+        })
+
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    items: [{
+                            id: 601102612,
+                            name: "Glittering Powder Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 500,
+                            qtd: 5000,
+                        },
+                        {
+                            id: 601102613,
+                            name: "Life Elixir Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 500,
+                            qtd: 5000,
+                        },
+                        {
+                            id: 601102614,
+                            name: "Identification Scroll Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 500,
+                            qtd: 5000,
+                        },
+                        {
+                            id: 601102615,
+                            name: "[E] Steel Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102616,
+                            name: "[E] Evil Minded Orb Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102617,
+                            name: "[E] Moon Shadow Stone Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102618,
+                            name: "[E] Quintessence Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102619,
+                            name: "[E] Exorcism Bauble Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102620,
+                            name: "[E] Platinum Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102621,
+                            name: "[E] Illuminating Fragment Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102622,
+                            name: "[E] Anima Stone Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102623,
+                            name: "[E] Herb Leaf Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102624,
+                            name: "[E] Herb Root Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102625,
+                            name: "[E] Reishi Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 100,
+                        },
+                        {
+                            id: 601102626,
+                            name: "[E] Advancement Tonic Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 50,
+                        },
+                        {
+                            id: 601102627,
+                            name: "[E] Greed Tonic Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 50,
+                        },
+                        {
+                            id: 601102628,
+                            name: "[E] Prosperity Tonic Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 50,
+                        },
+                        {
+                            id: 601102629,
+                            name: "[E] Heavy ATK Potion Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 50,
+                        },
+                        {
+                            id: 601102630,
+                            name: "[E] Adamant Potion Box",
+                            price: 0,
+                            gold: 0,
+                            eff: 0,
+                            seal: 1100,
+                            qtd: 50,
+                        },
+                    ],
+                }
+            },
+            async created() {
+                this.getItems();
+
+                setInterval(() => {
+                    this.getItems()
+                }, 5000)
+            },
+            methods: {
+                getItems() {
+                    if (window.localStorage.getItem('prices')) {
+                        this.items = JSON.parse(window.localStorage.getItem('prices'));
+                    }
+
+                    _.forEach(this.items, async (item, index) => {
+                        await axios.get(
+                            'https://webapi.mir4global.com/exd/lists?listType=explorer&class=0&itemType=0&grade=0&tier=0&enhance=-1&minPrice=0&maxPrice=0&sort=pricelow&uniqueFlag=0&searchType=2&EXDSearchId=' +
+                            item.id + '&page=1&languageCode=en').then(({
+                            data
+                        }) => {
+                            let key = _.findKey(this.items, {
+                                'id': item.id
+                            });
+
+                            if (data.data.totalCount > 0) {
+                                this.items[key].price = parseFloat(data.data.lists[0].price)
+                                this.items[key].img = data.data.lists[0].item.imgPath
+                            } else {
+                                this.$delete(this.items, key);
+                            }
+                        });
+                    });
+
+                    let interval = setInterval(() => {
+                        let key = _.findKey(this.items, {
+                            'price': 0
+                        });
+
+                        if (typeof key == 'undefined') {
+                            window.localStorage.setItem('prices', JSON.stringify(this.items));
+
+                            clearInterval(interval)
+                        }
+                    }, 100)
+                },
+                sort(type) {
+                    this.items = _.sortBy(this.items, (item) => { return parseFloat(item[type])});
+                },
+                async calc() {
+                    _.forEach(this.items, async (item, index) => {
+                        if (item.gold > 0) {
+                            item.eff = (item.price / (item.seal + (item.qtd*item.gold)) * 10000).toFixed(2)
+                        } else{
+                            item.eff = 0
+                        }
+                    });
+                }
+            },
+            watch: {
+                'items': {
+                    deep: true,
+                    async handler() {
+                        window.localStorage.setItem('prices', JSON.stringify(this.items));
+                        this.calc()
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
